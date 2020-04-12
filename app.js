@@ -182,4 +182,9 @@ app.use((err, req, res, next) => {
   res.json(error)
 })
 
+app.use(express.static('front-end/build'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'front-end', 'build', 'index.html'));
+});
+
 server.listen(port, () => `API running @ port ${port}`);
