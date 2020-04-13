@@ -17,24 +17,19 @@ export default class Landing extends React.Component {
     };
   }
 
-  /*Notification system module by Igor Prado, displays messages to the user
-  telling them to enter username/select a room
-  */
   notificationSystem = React.createRef();
   addNotification = (event) => {
     event.preventDefault();
     const notification = this.notificationSystem.current;
     if (this.state.name === undefined || this.state.name === "") {
-      console.log("Name must be set.");
       notification.addNotification({
-        message: "Please enter a username.", //message to be displayed
-        level: "warning", //type of notification (success, error, warning, info)
+        message: "Please enter a username.",
+        level: "warning",
       });
     } else if (
       this.state.selectedRoom === undefined ||
       this.state.selectedRoom === ""
     ) {
-      console.log("Room must be set.");
       notification.addNotification({
         message: "Please select a room to join.",
         level: "warning",
@@ -50,7 +45,6 @@ export default class Landing extends React.Component {
             room: this.state.selectedRoom,
             name: this.state.name,
           };
-          console.log(`user ${message.name} is joining ${message.room}`);
           socket.emit("usersListUpdate", message);
         }
       );
@@ -113,9 +107,9 @@ export default class Landing extends React.Component {
                   type="text"
                   placeholder="Enter Username"
                 />
-                <Button onClick={this.addNotification} variant="dark">
+                <button onClick={this.addNotification} variant="dark">
                   Enter Room!
-                </Button>
+                </button>
                 <NotificationSystem ref={this.notificationSystem} />
               </InputGroup>
             </Row>
@@ -136,7 +130,6 @@ export default class Landing extends React.Component {
         </Container>
       );
     } else if (this.state.navLocation === "NameSet") {
-      console.log(this.state.navLocation);
       return (
         <Room
           name={this.state.name}

@@ -19,7 +19,6 @@ class MessageComposer extends React.Component {
   handleSubmit = () => { };
 
   sendMessage = () => {
-    // substitute time for something more meaningful
     let time = moment().format("HH:mm:ss");
     if (this.state.msg !== "") {
       let message = {
@@ -43,6 +42,7 @@ class MessageComposer extends React.Component {
     return (
       <InputGroup className="composeArea">
         <Form.Control
+          as="textarea"
           size="lg"
           name="msg"
           value={this.state.msg}

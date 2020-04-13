@@ -22,7 +22,6 @@ export default class ChatRoom extends React.Component {
         this.setState({ chatRoomList: rooms })
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 
