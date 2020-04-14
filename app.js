@@ -126,6 +126,7 @@ io.on("connection", (socket) => {
       );
       userList[room] = userList[room].filter((usr) => usr !== data.name);
       io.to(`${room}`).emit("updateList", userList[room]);
+      console.log(userList[room]);
     } else {
     }
   });
@@ -166,5 +167,6 @@ app.use(express.static('front-end/build'));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'front-end', 'build', 'index.html'));
 });
+
 
 server.listen(port, () => `API running @ port ${port}`);

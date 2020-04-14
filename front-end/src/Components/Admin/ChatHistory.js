@@ -8,10 +8,10 @@ class ChatHistory extends React.Component {
     rows: [],
   };
   componentDidMount() {
-    this.retrieveEvents();
+    this.retrieveChat();
   }
 
-  retrieveEvents = () => {
+  retrieveChat = () => {
     Axios.get("http://18.224.228.195:3001/api/chatlog")
       .then((response) => {
         let dataColumns = [];
@@ -19,7 +19,8 @@ class ChatHistory extends React.Component {
           let newColumnEntry = {
             label: item,
             field: item,
-            sort: "asc",
+            sort: "desc",
+            width: 150
           };
           if (newColumnEntry.label === "by") {
             newColumnEntry.label = "Sender";
@@ -36,22 +37,23 @@ class ChatHistory extends React.Component {
         <Container>
           <Col>
             <Row className="justify-content-md-center pt-4">
-              <h1>Chat History</h1>
+              <h1 className="text-white">Chat History</h1>
             </Row>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center tableBackground">
               <MDBDataTable
+                hover
+                maxHeight="500px"
+                scrollX
+                scrollY
                 striped
-                small
                 bordered
+                entries={5}
                 responsive
-                entries={8}
-                dark
-                tbodyTextWhite
-                theadTextWhite
                 displayEntries={false}
                 paging={true}
                 data={this.state}
                 noBottomColumns
+                sortable
               />
             </Row>
           </Col>
